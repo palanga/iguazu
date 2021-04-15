@@ -1,7 +1,7 @@
 package palanga.iguazu.core.model
 
 import palanga.iguazu.core.model.util.{ GreaterThanZeroQuantity, Id }
-import palanga.util.price.Price
+//import palanga.util.price.Price
 import zio.prelude.NonEmptyList
 
 object types {
@@ -18,6 +18,8 @@ object types {
   )
 
   case class Article(name: String, price: Price)
+
+  type Price = String
 
   case class Tag(key: String, value: String)
 

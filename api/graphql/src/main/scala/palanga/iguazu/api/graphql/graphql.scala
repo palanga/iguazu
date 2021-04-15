@@ -8,13 +8,13 @@ import palanga.iguazu.api.graphql.mutations.resolvers.mutationsResolver
 import palanga.iguazu.api.graphql.queries.resolvers.queriesResolver
 import palanga.iguazu.api.graphql.queries.types.{ CustomerNode, OrderNode, StoreNode }
 import palanga.iguazu.core.model.util.{ GreaterThanZeroQuantity, NonZeroQuantity }
-import palanga.util.price.Price
+//import palanga.util.price.Price
 import zio.prelude.NonEmptyList
 
 object graphql extends GenericSchema[Dependencies] {
 
-  implicit val priceSchema: Schema[Any, Price]    = Schema.stringSchema.contramap(_.toString)
-  implicit val priceArgBuilder: ArgBuilder[Price] = ArgBuilder.string.map(Price.fromStringUnsafe)
+//  implicit val priceSchema: Schema[Any, Price]    = Schema.stringSchema.contramap(_.toString)
+//  implicit val priceArgBuilder: ArgBuilder[Price] = ArgBuilder.string.map(Price.fromStringUnsafe)
 
   implicit val nonZeroArgBuilder: ArgBuilder[NonZeroQuantity] =
     ArgBuilder.int.flatMap(NonZeroQuantity(_).toRight(CalibanError.ExecutionError("zero quantity")))

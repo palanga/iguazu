@@ -65,14 +65,13 @@ lazy val core =
       fork in run := true,
       testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
       libraryDependencies ++= Seq(
-        "dev.palanga"          %% "price"               % PRICE_VERSION,
-        "io.github.kitlangton" %% "zio-magic"           % ZIO_MAGIC_VERSION,
-        "dev.zio"              %% "zio-config"          % ZIO_CONFIG_VERSION,
-        "dev.zio"              %% "zio-config-magnolia" % ZIO_CONFIG_VERSION,
-        "dev.zio"              %% "zio-config-yaml"     % ZIO_CONFIG_VERSION,
-        "dev.zio"              %% "zio-json"            % ZIO_JSON_VERSION,
-        "dev.zio"              %% "zio-test"            % ZIO_VERSION % "test",
-        "dev.zio"              %% "zio-test-sbt"        % ZIO_VERSION % "test",
+//        "dev.palanga" %% "price"        % PRICE_VERSION,
+        "dev.zio" %% "zio"          % ZIO_VERSION,
+        "dev.zio" %% "zio-prelude"  % "1.0.0-RC3",
+        "dev.zio" %% "zio-streams"  % ZIO_VERSION,
+        "dev.zio" %% "zio-json"     % ZIO_JSON_VERSION,
+        "dev.zio" %% "zio-test"     % ZIO_VERSION % "test",
+        "dev.zio" %% "zio-test-sbt" % ZIO_VERSION % "test",
       ),
     )
 
@@ -85,8 +84,12 @@ lazy val api =
       fork in run := true,
       testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
       libraryDependencies ++= Seq(
-        "dev.palanga"   %% "aconcagua-graphql" % ACONCAGUA_GRAPHQL_VERSION,
-        "ch.qos.logback" % "logback-classic"   % "1.2.3",
+        "dev.palanga"          %% "aconcagua-graphql"   % ACONCAGUA_GRAPHQL_VERSION,
+        "io.github.kitlangton" %% "zio-magic"           % ZIO_MAGIC_VERSION,
+        "dev.zio"              %% "zio-config"          % ZIO_CONFIG_VERSION,
+        "dev.zio"              %% "zio-config-magnolia" % ZIO_CONFIG_VERSION,
+        "dev.zio"              %% "zio-config-yaml"     % ZIO_CONFIG_VERSION,
+        "ch.qos.logback"        % "logback-classic"     % "1.2.3",
       ),
     )
     .dependsOn(
@@ -126,6 +129,25 @@ lazy val notifications =
       core,
       event_sourcing,
     )
+
+lazy val ui =
+  (project in file("ui"))
+    .enablePlugins(
+      ScalaJSPlugin
+    )
+    .settings(commonSettings)
+    .settings(
+      name := "iguazu-ui",
+      fork in Test := true,
+      fork in run := true,
+      scalaJSUseMainModuleInitializer := true,
+      scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
+      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
+      libraryDependencies ++= Seq(
+        "com.raquo" %%% "laminar" % "0.12.2"
+      ),
+    )
+    .dependsOn(core)
 
 val commonSettings =
   Def.settings(

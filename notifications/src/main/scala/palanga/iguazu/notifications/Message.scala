@@ -29,7 +29,7 @@ object Message {
 
   implicit class ArticlesShow(private val self: NonEmptyList[(Article, GreaterThanZeroQuantity)]) extends AnyVal {
     def show = {
-      val total = self.map { case (article, quantity) => article.price * quantity.self }.sum
+      val total = "self.map { case (article, quantity) => article.price * quantity.self }.sum"
       self.map(_.show).mkString("", "\n", "\n") + "Total: " + total
     }
   }

@@ -32,7 +32,7 @@ class EventSourcedStores(
 
 object datasa {
 
-  import palanga.util.price.Currency.ARS
+//  import palanga.util.price.Currency.ARS
 
   import java.util.UUID
 
@@ -47,11 +47,11 @@ object datasa {
       StoreEvent.ArticlesUpdated(
         List(
           (
-            Article("Foto en la playa", ARS * 120),
+            Article("Foto en la playa", "ARS * 120"),
             List(Tag("formato", "cuadrado"), Tag("color", "blanco"), Tag("color", "negro")),
           ),
           (
-            Article("Trapo de bienvenida", ARS * 230),
+            Article("Trapo de bienvenida", "ARS * 230"),
             List(Tag("material", "algodon"), Tag("color", "blanco")),
           ),
         )
