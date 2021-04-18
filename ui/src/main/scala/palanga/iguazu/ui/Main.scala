@@ -17,28 +17,7 @@ object Main {
     val _ = documentEvents.onDomContentLoaded.foreach { _ =>
       val appContainer = dom.document.querySelector("#app")
       appContainer.innerHTML = ""
-      val _            = render(appContainer, Slides.view)
+      val _            = render(appContainer, Home.view)
     }(unsafeWindowOwner)
   }
-}
-
-object Slides {
-
-//  val view = div("hi")
-
-  val nameVar = Var(initial = "lalala")
-
-  val view = div(
-    label("Your name: "),
-    input(
-      onMountFocus,
-      placeholder := "Enter your name here",
-      inContext(thisNode => onInput.map(_ => thisNode.ref.value) --> nameVar),
-    ),
-    span(
-      "Hello, ",
-      child.text <-- nameVar.signal.map(_.toUpperCase),
-    ),
-  )
-
 }
