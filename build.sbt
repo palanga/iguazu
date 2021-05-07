@@ -55,20 +55,16 @@ lazy val root =
       core,
       event_sourcing,
       api,
-      ui,
     )
 
 lazy val core =
   (project in file("core"))
-    .enablePlugins(ScalaJSPlugin)
     .settings(commonSettings)
     .settings(
       name := "iguazu-core",
       version := IGUAZU_VERSION,
       fork in Test := true,
       fork in run := true,
-      scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
-      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
       libraryDependencies ++= Seq(
         "dev.palanga" %% "price"        % PRICE_VERSION,
@@ -135,23 +131,6 @@ lazy val notifications =
       core,
       event_sourcing,
     )
-
-lazy val ui =
-  (project in file("ui"))
-    .enablePlugins(ScalaJSPlugin)
-    .settings(commonSettings)
-    .settings(
-      name := "iguazu-ui",
-      fork in Test := true,
-      fork in run := true,
-      scalaJSUseMainModuleInitializer := true,
-      scalaJSLinkerConfig ~= { _.withModuleKind(ModuleKind.ESModule) },
-      scalaJSLinkerConfig ~= { _.withSourceMap(false) },
-      libraryDependencies ++= Seq(
-        "com.raquo" %%% "laminar" % "0.12.2"
-      ),
-    )
-    .dependsOn(core)
 
 val commonSettings =
   Def.settings(
