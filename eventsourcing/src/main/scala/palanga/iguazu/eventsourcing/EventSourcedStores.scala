@@ -7,6 +7,7 @@ import palanga.iguazu.eventsourcing.events.StoreEvent
 import palanga.iguazu.eventsourcing.events.StoreEvent.{ ArticlesUpdated, Created }
 import palanga.parana.journal.Journal
 import palanga.parana.{ EventSource, Reducer }
+import palanga.util.price.Currency.ARS
 import zio.{ Has, ZLayer }
 
 object EventSourcedStores {
@@ -47,11 +48,11 @@ object datasa {
       StoreEvent.ArticlesUpdated(
         List(
           (
-            Article("Foto en la playa", "ARS * 120"),
+            Article("Foto en la playa", ARS * 120),
             List(Tag("formato", "cuadrado"), Tag("color", "blanco"), Tag("color", "negro")),
           ),
           (
-            Article("Trapo de bienvenida", "ARS * 230"),
+            Article("Trapo de bienvenida", ARS * 230),
             List(Tag("material", "algodon"), Tag("color", "blanco")),
           ),
         )

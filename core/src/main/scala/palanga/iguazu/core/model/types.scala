@@ -17,9 +17,10 @@ object types {
     discounts: List[Discount] = Nil,
   )
 
-  case class Article(name: String, price: Price, media: List[String] = Nil)
+  case class Article(name: String, price: Price, media: List[URL] = Nil)
 
   type Price = String
+  type URL   = String
 
   case class Tag(key: String, value: String)
 

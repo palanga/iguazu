@@ -1,1 +1,1 @@
-{"name":"sbt","version":"1.4.4","bspVersion":"2.0.0-M5","languages":["scala"],"argv":["/usr/local/Cellar/openjdk/15.0.2/libexec/openjdk.jdk/Contents/Home/bin/java","-Xms100m","-Xmx100m","-classpath","/usr/local/Cellar/sbt/1.4.3/libexec/bin/sbt-launch.jar","xsbt.boot.Boot","-bsp"]}
+{"name":"sbt","version":"1.4.4","bspVersion":"2.0.0-M5","languages":["scala"],"argv":["/usr/local/Cellar/openjdk@11/11.0.7+10/libexec/openjdk.jdk/Contents/Home/bin/java","-Xms100m","-Xmx100m","-classpath","/usr/local/Cellar/sbt/1.5.0/libexec/bin/sbt-launch.jar","xsbt.boot.Boot","-bsp"]}

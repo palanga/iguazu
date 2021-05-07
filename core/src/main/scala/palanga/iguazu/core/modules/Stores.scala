@@ -9,5 +9,5 @@ trait Stores {
 }
 
 object Stores {
-  def get(id: Id[Store]) = ZIO.accessM[Has[Stores]](_.get.get(id))
+  def get(id: Id[Store]): ZIO[Has[Stores], Throwable, Store] = ZIO.accessM[Has[Stores]](_.get.get(id))
 }

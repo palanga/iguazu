@@ -2,7 +2,7 @@ name := "iguazu"
 
 val IGUAZU_VERSION = "0.0.1"
 
-val MAIN_SCALA = "2.13.4"
+val MAIN_SCALA = "2.13.5"
 val ALL_SCALA  = Seq(MAIN_SCALA)
 
 val ACONCAGUA_GRAPHQL_VERSION = "0.3.0"
@@ -18,6 +18,8 @@ val PARANA_VERSION = "0.4.1"
 val ZIO_CONFIG_VERSION = "1.0.2"
 
 val ZIO_JSON_VERSION = "0.1.3"
+
+val ZIO_PRELUDE_VERSION = "1.0.0-RC3"
 
 val ZIO_VERSION = "1.0.5"
 
@@ -69,13 +71,13 @@ lazy val core =
       scalaJSLinkerConfig ~= { _.withSourceMap(false) },
       testFrameworks := Seq(new TestFramework("zio.test.sbt.ZTestFramework")),
       libraryDependencies ++= Seq(
-//        "dev.palanga" %% "price"        % PRICE_VERSION,
-        "dev.zio" %% "zio"          % ZIO_VERSION,
-        "dev.zio" %% "zio-prelude"  % "1.0.0-RC3",
-        "dev.zio" %% "zio-streams"  % ZIO_VERSION,
-        "dev.zio" %% "zio-json"     % ZIO_JSON_VERSION,
-        "dev.zio" %% "zio-test"     % ZIO_VERSION % "test",
-        "dev.zio" %% "zio-test-sbt" % ZIO_VERSION % "test",
+        "dev.palanga" %% "price"        % PRICE_VERSION,
+        "dev.zio"     %% "zio"          % ZIO_VERSION,
+        "dev.zio"     %% "zio-prelude"  % ZIO_PRELUDE_VERSION,
+        "dev.zio"     %% "zio-streams"  % ZIO_VERSION,
+        "dev.zio"     %% "zio-json"     % ZIO_JSON_VERSION,
+        "dev.zio"     %% "zio-test"     % ZIO_VERSION % "test",
+        "dev.zio"     %% "zio-test-sbt" % ZIO_VERSION % "test",
       ),
     )
 
@@ -169,27 +171,8 @@ val commonSettings =
       "-language:existentials",
       "-unchecked",
       "-Xlint:_,-type-parameter-shadow",
-      //    "-Xfatal-warnings",
       "-Ywarn-numeric-widen",
       "-Ywarn-unused:patvars,-implicits",
       "-Ywarn-value-discard",
-      //      "-Ymacro-annotations",
-    ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 12)) =>
-        Seq(
-          "-Xsource:2.13",
-          "-Yno-adapted-args",
-          "-Ypartial-unification",
-          "-Ywarn-extra-implicit",
-          "-Ywarn-inaccessible",
-          "-Ywarn-infer-any",
-          "-Ywarn-nullary-override",
-          "-Ywarn-nullary-unit",
-          "-opt-inline-from:<source>",
-          "-opt-warnings",
-          "-opt:l:inline",
-        )
-      case _             => Nil
-    }),
-    //    scalacOptions in Test --= Seq("-Xfatal-warnings"),
+    ),
   )
